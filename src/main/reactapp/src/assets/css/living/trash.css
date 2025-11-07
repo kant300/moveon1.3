@@ -1,0 +1,42 @@
+
+#textBox {
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.trashText {
+    background-color: #c5efff;
+}
+
+.trashText > div {
+    text-align: left;
+    margin-left: 24px;
+    margin-bottom: 24px;
+    padding: 3px 0;
+}
+
+.trashInfoDiv {
+    display: flex;
+    padding: 10px 10px 10px 0;
+    margin: 0 24px;
+    margin-bottom: 24px;
+    background-color: #E7F8FF;
+    border-radius: 20px;
+}
+
+.trashInfoDiv > div > img {
+    height: 100px;
+}
+
+.trashInfoDiv > div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.trashTitle {
+    font-size: 16px;
+    font-weight: bold;
+}

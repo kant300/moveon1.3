@@ -1,0 +1,53 @@
+plugins {
+    id 'java' // 자바
+    id 'org.springframework.boot' version '3.5.4' // 스프링부트 버전
+    id 'io.spring.dependency-management' version '1.1.7' // 스프링 의존성 버전
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web' //스프링부트 웹 설치
+    runtimeOnly 'com.mysql:mysql-connector-j' //MYSQL JDBC 라이브러리 설치
+    implementation "org.apache.tomcat.embed:tomcat-embed-jasper"  // JSP 라이브러리 설치
+    // lombok 롬복 라이브러리 설치
+    implementation("net.sf.opencsv:opencsv:2.3") // OpenCSV
+    implementation 'org.seleniumhq.selenium:selenium-java:4.35.0' // Selenium
+    implementation 'io.github.bonigarcia:webdrivermanager:6.3.1' // web driver manager
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    // WebSocket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    // JSOUP
+    implementation 'org.jsoup:jsoup:1.21.2'
+    // mybatis
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
+    // AOP 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    // [11] 비크립트( 암호화 )
+    implementation 'org.springframework.security:spring-security-crypto:6.4.4'
+    // [12] JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    implementation("org.apache.poi:poi-ooxml:5.4.1")
+    // email 전송
+    implementation 'org.springframework.boot:spring-boot-starter-mail'      // email 전송 spring boot 에서만 가능
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

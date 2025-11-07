@@ -1,0 +1,302 @@
+#loginBox {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#weatherBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 5px 5px 20px rgb(201, 201, 201);
+    margin: 10px;
+    font-family: 'NanumGothic', sans-serif;
+}
+.w_cont{
+display: flex;
+    align-items: center;
+    text-align: left;
+}
+.w_inner{
+  margin-right: 10px;
+}
+.w_inner > .w_addr{
+  font-weight: bold;
+}
+.w_inner > .w_pty{
+  font-size: 35px;
+  font-weight: bold;
+  margin: 10px 0px;
+}
+#infoBox > #item1 > .reh {
+  color:  black;
+  margin-left: 5px;
+  font-weight: bold;
+}
+#infoBox {
+  font-size: 12px;
+}
+
+#infoBox > #item2 > .sky {
+  color:  blue;
+  margin-left: 5px;
+    font-weight: bold;
+
+}
+
+#infoBox > #item3 > .wsd{
+  color:  red;
+  margin-left: 5px;
+    font-weight: bold;
+
+}
+
+#weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #222;
+    margin-left: -20px;
+    justify-content: space-evenly;
+}
+
+#weather #addr {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+#weather #infoBox {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+#weather #t1h {
+    font-size: 80px;
+    font-weight: bold;
+    color: #333;
+    padding-bottom: 15px;
+}
+
+#weather #pty {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 16px;
+    margin-right: 15px;
+}
+
+#categoryBox {
+    margin-top: 20px;
+    padding: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(77, 204, 255);
+}
+
+#categoryBox > li {
+    margin-left: 30px;
+    margin-right: 20px;
+    font-size: 18px;
+}
+
+#btnBox {
+    padding: 2px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+#eventCategory {
+      margin-top: 30px;
+    padding: 15px;
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid rgb(77, 204, 255);
+}
+
+#eventCategory > li {
+    width: 105px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+
+
+#eventList li {
+    padding: 10px 0px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#alertBox {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+#alertBox > img {
+    margin-right: 10px; 
+}
+
+/* css 추가 */
+/* 버튼 아이콘 박스 : 드래그 가능한 캐러셀 스타일 */
+#btnBox {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 15px;
+  cursor: grab;                    /* 기본 상태에서 손 모양 커서 */
+  user-select: none;               /* 텍스트 드래그 방지 */
+  scrollbar-width: none;           /* Firefox 스크롤바 숨김 */
+  
+}
+
+#btnBox:active {
+  cursor: grabbing;                /* 드래그 중 손 모양 변경 */
+}
+
+/* 스크롤바 완전히 숨김 */
+#btnBox::-webkit-scrollbar {
+  display: none;
+}
+
+/* 각 아이템 */
+#btnBox a {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  text-decoration: none;
+}
+
+#btnBox li {
+  background: #eaf5ff;
+  border-radius: 16px;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+  color: #666;
+  
+}
+
+#btnBox li img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+/* Hover 시 */
+#btnBox li:hover {
+  transform: scale(1.05);
+  background: #eaf5ff;
+  color: black; font-weight: bold;
+}
+/* ✅ 선택된(active) 카테고리 */
+#categoryBox li.active {
+  font-weight: bold;
+  color: #4dccff;
+  transform: scale(1.05);
+}
+/* ✅ 선택된(active) 카테고리 */
+#eventCategory li.active {
+  color: #4dccff;
+  transform: scale(1.05);
+}
+
+
+#eventCategory {
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  padding: 0;
+  border-bottom: 2px solid #eee;
+}
+
+#eventCategory li {
+  cursor: pointer;
+  padding: 8px 12px;
+  font-weight: 500;
+  color: #666;
+}
+
+
+#eventList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  list-style: none;
+  padding: 7px;
+}
+
+.event-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-3px);
+}
+
+.event-card .thumb img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.event-card .info {
+  padding: 10px;
+}
+
+.event-card .info h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+
+      /*  텍스트 말줄임 처리 */
+  white-space: nowrap;      /* 줄바꿈 금지 */
+  overflow: hidden;         /* 넘친 텍스트 숨김 */
+  text-overflow: ellipsis;  /* 넘칠 경우 ... 표시 */
+  display: inline-block;    /* 말줄임 처리를 위해 inline-block 필요 */
+  max-width: 180px;          /* 적당한 폭 제한 (필요시 조정) */
+  vertical-align: middle;   /* 줄 정렬 맞추기 */
+
+}
+
+.event-card .info .price {
+  font-size: 14px;
+  color: #333;
+}
+
+.event-card .info .sale {
+  color: #333;
+  margin-right: 5px;
+  font-size: 10px;
+
+    /*  텍스트 말줄임 처리 */
+  white-space: nowrap;      /* 줄바꿈 금지 */
+  overflow: hidden;         /* 넘친 텍스트 숨김 */
+  text-overflow: ellipsis;  /* 넘칠 경우 ... 표시 */
+  display: inline-block;    /* 말줄임 처리를 위해 inline-block 필요 */
+  max-width: 180px;          /* 적당한 폭 제한 (필요시 조정) */
+  vertical-align: middle;   /* 줄 정렬 맞추기 */
+}

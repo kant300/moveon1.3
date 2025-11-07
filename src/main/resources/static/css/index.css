@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 'NanumGothic';
+    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css') format('font-woff');
+    font-weight: normal;
+    font-display: swap;
+}
+*{ 
+    font-family: 'NanumGothic';
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    }  
+
+a:hover,
+a:visited,
+a:active {
+  color: black;
+  text-decoration: none;
+}
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#container{ 
+    flex-direction: column;
+    width: 420px; height: 93vh !important;
+    display: flex;
+    align-items: center;
+    
+}
+#headerBox{
+    display: flex;
+    padding-right: 18px;
+}
+
+.logo{
+    width: 110px;
+    padding: 20px;
+}
+#title{ 
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+#sub-title{
+    text-align: right;
+    font-size: 12px;
+}
+
+.content{
+    height: 300px;
+}
+.weather{ 
+    width: 380px; height: 250px;}
+
+.infoBox{
+    height: 350px;
+}
+.btnBox1{
+    display: flex;
+    justify-content: space-evenly;
+    width: 380px;}
+.btnBox2{
+    display: flex;
+    justify-content: space-evenly;
+    width: 380px;}
+
+.sample{ 
+    width: 135px;
+    height: 135px;
+    margin-bottom: -10px;
+}
+.btnBox1 div, .btnBox2 div {
+    text-align: center;  /* 텍스트 가운데 정렬 */
+    width: 150px;
+}
+
+.btnBox1 a, .btnBox2 a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #333;
+    height: 100%; /* 전체 높이 차지 */
+    text-align: center;
+} 
+
+
+.weatherBox {
+    background: linear-gradient(to bottom, #f5faff, #e0f7ff);
+    border-radius: 15px;
+    padding: 20px;
+    width: 380px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    font-family: 'NanumGothic', sans-serif;
+}
+
+.weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #222;
+    margin-left: -20px;
+    justify-content: space-evenly;
+}
+
+.weather .addr {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.weather .t1h {
+    font-size: 38px;
+    font-weight: bold;
+    color: #333;
+}
+
+.weather .pty {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 16px;
+    margin-right: 15px;
+}
+.weatherDetails {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.weatherDetails .item {
+    background: white;
+    border-radius: 10px;
+    padding: 12px 10px;
+    width: 100%;
+    max-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.weatherDetails .item span.label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+

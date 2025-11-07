@@ -1,0 +1,144 @@
+/* 전체 컨테이너 */
+.bulk-container {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  height: 86vh;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  padding-bottom: 70px; /* ✅ Footer 높이에 맞춰 딱 정렬 */
+}
+
+/* 헤더 */
+.bulk-header {
+  padding: 0px 6px;
+}
+
+/* 🔍 검색 영역 + 글쓰기 버튼 한 줄 배치 */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px 0 15px 0;
+}
+
+/* 검색 입력창 */
+.search-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #4dccff;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  background-color: #ffffff;
+  transition: all 0.2s ease-in-out;
+  box-shadow: inset 0 0 5px rgba(0, 170, 255, 0.15);
+}
+
+.search-input:focus {
+  border-color: #0095ff;
+  box-shadow: 0 0 6px rgba(0, 150, 255, 0.4);
+}
+
+/* ✏️ 심플 글쓰기 버튼 */
+.write-btn {
+  background-color: #4dccff;
+  width: 100px;
+  color: white;
+  border: none;
+  border-radius: 6px; /* ✅ 살짝만 둥글게 */
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.write-btn:hover {
+  background-color: #0095e6;
+  border-color: #006bb3;
+}
+
+.write-btn:active {
+  background-color: #007acc;
+  transform: translateY(1px);
+}
+
+/* 리스트 */
+.bulk-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 15px 30px;
+}
+
+/* ✅ 스크롤바 투명 처리 */
+.bulk-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bulk-list::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.bulk-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 카드 */
+.bulk-card {
+  border: 2px solid #000;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.bulk-card:hover {
+  transform: translateY(-3px);
+}
+
+/* 카드 텍스트 */
+.bulk-card h5 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bulk-card .content {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #444;
+}
+
+/* 인원 + 지역 */
+.bulk-card .info {
+  font-size: 13px;
+  color: #333;
+}
+
+.bulk-card .region {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bulk-card{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: none;
+    box-shadow: 1px 1px 3px #4dccff;
+}
+.bulk-card > .img > img{
+  object-fit: cover;
+  border-radius: 20px;
+  margin-right: 10px;
+  width: 80px; height: 80px;
+}
+.bulk-card .itemInfo .count{
+  color: #f69299;
+}

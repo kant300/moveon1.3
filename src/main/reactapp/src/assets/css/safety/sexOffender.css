@@ -1,0 +1,28 @@
+*{
+    font-family: 'NanumGothic';
+}
+#container
+#criminalTitle{
+    padding-top:10px;
+}
+#criminal_container{
+    font-size: 16px;
+    text-align: center;
+    padding-top: 10px;
+}
+.box_search{
+    text-align: center;
+    padding: 10px;
+}
+.tf_keyword{
+    width: 200px;
+    height: 30px;
+    border: 2px solid ;
+    padding-left: 10px;
+}
+.search_button{
+    width: 40px;
+    height: 30px;
+    background-color: #99E2FF;
+    color: black;
+}

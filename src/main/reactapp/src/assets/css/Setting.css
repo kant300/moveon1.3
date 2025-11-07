@@ -1,0 +1,41 @@
+
+#settingTop {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    margin: 2vh 30px 7vh 30px;
+}
+
+#title {
+    margin: 0 auto;
+}
+
+.settingBox {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10%;
+    margin: 2vh 20px;
+    padding: 15px;
+}
+
+.settingBox > div {
+    align-items: center;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: gray;
+}
+
+.settingBox > div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.toggleBtn {
+    width: 40px;
+}

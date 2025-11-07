@@ -1,0 +1,173 @@
+/* 전체 래퍼 및 컨테이너 스타일 */
+#wrap {
+    min-height: 100vh; /* 전체 높이 설정 */
+}
+
+/* 컨테이너 좌우 여백 설정 (항목 박스의 좌우 여백을 위해 줄입니다) */
+#container {
+    padding: 0 0px; /* 좌우 여백을 0으로 설정하거나 좁게 설정 */
+}
+/* 1. 개인 정보 항목 그룹 (이름 ~ 주소) */
+.myinfo_detail {
+    margin: 15px 20px; /* 상하 15px, 좌우 20px 여백으로 회색 배경 분리 */
+    padding: 10px 15px;
+    
+    /* 배경 및 모서리 스타일 수정 */
+    background-color: #FFFFFF; /* 흰색 배경 */
+    border-radius: 8px; /* 둥근 모서리 */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* 은은한 그림자 효과 (선택 사항) */
+}
+/* 💡 라벨과 값을 묶는 컨테이너 */
+.info_label_wrap {
+    display: flex;
+    flex-direction: column; /* 내용을 수직(세로)으로 정렬 */
+    flex-grow: 1; /* 남은 공간을 채우도록 확장 (링크를 오른쪽 끝으로 밀어냅니다) */
+    align-items: flex-start; /* 텍스트를 왼쪽 정렬 */
+}
+
+/* 2. 비밀번호 항목 그룹 */
+.myinfo_detail1 {
+    margin: 15px 20px; /* 상하 15px, 좌우 20px 여백 */
+    padding: 10px 15px;
+    
+    /* 배경 및 모서리 스타일 수정 */
+    background-color: #FFFFFF; /* 흰색 배경 */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* 3. 회원탈퇴 항목 그룹 */
+.myinfo_detail2 {
+    margin: 15px 20px; /* 상하 15px, 좌우 20px 여백 */
+    padding: 15px;
+    
+    /* 배경 및 모서리 스타일 수정 */
+    background-color: #FFFFFF; /* 흰색 배경 */
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* 회원 기본 정보 영역 */
+#myinfo_basic {
+   
+    text-align: center; 
+}
+#myinfo_id {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #1F1F1F;
+}
+#myinfo_date {
+    font-size: 14px;
+    color: #6a6a6a;
+    margin-bottom: 10px; /* 상태 표시와 간격 */
+}
+#status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+#status-dot::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #4CAF50; /* 녹색 점 */
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/* 1. 개인 정보 항목 그룹 (이름 ~ 주소) */
+.myinfo_detail {
+    margin-bottom: 15px; /* 다음 그룹과의 간격 */
+    padding: 10px 15px;
+    
+    /* 배경 및 모서리 스타일 */
+    background-color: white; /* 밝은 민트색 계열 배경 */
+    border-radius: 12px;
+}
+
+/* 2. 비밀번호 항목 그룹 */
+.myinfo_detail1 {
+    margin-bottom: 15px; /* 다음 그룹과의 간격 */
+    padding: 10px 15px;
+    
+    /* 배경 및 모서리 스타일 */
+    background-color: white; 
+    border-radius: 12px;
+}
+
+/* 3. 회원탈퇴 항목 그룹 */
+.myinfo_detail2 {
+    padding: 15px; /* 내부 여백을 더 크게 설정 */
+    
+    /* 배경 및 모서리 스타일 */
+    background-color: white; 
+    border-radius: 12px;
+    text-align: center; /* 회원탈퇴 텍스트 중앙 정렬 */
+}
+.myinfo_detail2 .info_item {
+    border-bottom: none; /* 회원탈퇴 항목은 구분선 제거 */
+}
+/* 모든 정보 항목 (이름, 이메일 등) */
+.info_item {
+    display: flex;
+    justify-content: space-between; /* 양 끝 정렬 */
+    align-items: center;
+    padding: 10px 0; /* 항목 상하 여백 */
+    border-bottom: none
+}
+/* 마지막 항목의 구분선 제거 (이름~주소 그룹 내에서) */
+.myinfo_detail .info_item:last-child {
+    border-bottom: none;
+}
+/* 비밀번호 항목의 구분선 제거 */
+.myinfo_detail1 .info_item {
+    border-bottom: none;
+}
+
+/* 항목의 라벨 (이름, 이메일 등) */
+
+.info_label, .info_pwd {
+    color: #888; /* 짙은 회색 */
+    flex-basis: 25%; /* 라벨 영역 너비 조정 */
+    font-size: 14px;
+    padding: auto;
+}
+
+
+/* 항목의 값 (홍길동, 이메일 주소, 번호 등) */
+.info_value {
+    color: black; 
+    flex-basis: 55%; /* 값 영역 너비 조정 */
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+}
+
+/* "변경하기" 링크 */
+.info_item a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #888; /* 변경하기 텍스트 색상 */
+    font-size: 14px;
+    text-decoration: none;
+    flex-basis: 20%; /* 링크 영역 너비 조정 */
+    justify-content: flex-end; /* 오른쪽 끝으로 정렬 */
+    
+}
+
+
+/* 회원탈퇴 텍스트 스타일 */
+.myinfo_detail2 .info_item a {
+    font-size: 18px;
+    color: #1c1d1d; /* 회원탈퇴 텍스트 강조 */
+    justify-content: left;
+    flex-basis: 100%;
+}

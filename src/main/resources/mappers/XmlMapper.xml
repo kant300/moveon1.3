@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!-- 소분모임 목록 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="web.model.mapper.community.BulkbuygroupMapper"> <!-- mybatis -->
+    <insert id="createGroup" parameterType="web.model.dto.community.BulkbuygroupDto" useGeneratedKeys="true" keyProperty="bno">
+        <!-- 방만들때 회원번호fk , 제목 내용 인원수 설정  -->
+        INSERT INTO bulkbuygroup( mno , btitle , bcontent , btotal , bcount )
+        values
+        ( #{mno} , #{btitle} , #{bcontent} , #{btotal} , 1 )
+    </insert>
+
+
+    <!-- 전체 검색 (작성자 주소 포함) -->
+    <select id="listGroup" resultType="web.model.dto.community.BulkbuygroupDto">
+        SELECT * FROM bulkbuygroup
+        WHERE read_only = 0
+        ORDER BY bno DESC
+    </select>
+
+    <!-- 본인 참여 방내역 -->
+    <select id="joinlist" parameterType="map" resultType="web.model.dto.community.BulkbuygroupDto">
+        SELECT
+        b.bno, b.mno, b.btitle, b.bcontent, b.bcount, b.btotal, b.bdate, m.maddress1 , m.maddress2 , m.maddress3
+        FROM bulkbuygroup b
+        JOIN group_member gm on b.bno = gm.bno
+        JOIN members m ON b.mno = m.mno
+        WHERE gm.mno = #{mno}
+        ORDER BY b.bdate DESC;
+    </select>
+
+    <!-- 시 구 동 주소 검색 -->
+    <select id="addressGroup" parameterType="map" resultType="web.model.dto.community.BulkbuygroupDto">
+        SELECT b.* , m.maddress1 , m.maddress2 , m.maddress3
+        FROM bulkbuygroup b join member m on b.mno = m.mno
+        where 1=1
+        <if test="maddress1 != null">
+            and m.maddress1 = #{maddress1}
+        </if>
+        <if test="maddress2 != null">
+            and m.maddress2 = #{maddress2}
+        </if>
+        <if test="maddress3 != null">
+            and m.maddress3 = #{maddress3}
+        </if>
+    </select>
+
+    <!-- 검색 제목/내용 ex) 안녕치면 안녕 이라는 글 포함 나옴 -->
+    <select id="listprint" parameterType="map" resultType="web.model.dto.community.BulkbuygroupDto">
+        SELECT * FROM bulkbuygroup where
+        btitle like concat( '%' , #{btitle} , '%' ) or
+        bcontent like concat ( '%' , #{bcontent} , '%' )
+    </select>
+
+    <!-- 삭제시 본인 회원번호 확인시 삭제 -->
+    <delete id="deleteGroup" parameterType="int">
+        DELETE FROM bulkbuygroup where bno = #{bno};
+    </delete>
+
+    <!-- 수정시 수정하려는 채팅방 확인후 제목/내용 수정 필요 시 인원수도 하겠음 -->
+    <update id="updateGroup" parameterType="web.model.dto.community.BulkbuygroupDto">
+        UPDATE bulkbuygroup set btitle = #{btitle} , bcontent = #{bcontent} where bno = #{bno}
+    </update>
+
+    <!-- 인원 확인 후  -->
+    <update id="countCheck" parameterType="int">
+        UPDATE bulkbuygroup set bcount = bcount+1 where bno = #{bno} and bcount &lt; btotal
+    </update>
+
+
+</mapper>

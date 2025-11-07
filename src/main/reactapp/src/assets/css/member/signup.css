@@ -1,0 +1,36 @@
+
+#addressTitle {
+    margin: 15px 0;
+}
+
+#address {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+#address > select {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+}
+
+#signupDiv {
+    margin-left: 24px;
+}
+
+#signupDiv > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#btnDiv {
+    display: flex;
+    justify-content: center;
+}
+
+#signupDiv .input {
+    font-size: 18px;
+    margin-right: 24px;
+}

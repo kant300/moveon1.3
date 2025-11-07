@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 채팅방 -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="web.model.mapper.community.ChatMapper">
+    <!-- 채팅방 메세지 내용 저장 DB  -->
+    <insert id="writeChat" parameterType="web.model.dto.community.ChattingDto">
+        INSERT INTO chatting(mno , bno , mmessage)
+        values
+        ( #{mno} , #{bno} , #{mmessage} )
+    </insert>
+
+    <!-- 채팅방 메세지 내용 출력 -->
+    <select id="printChat" parameterType="web.model.dto.community.ChattingDto" resultType="web.model.dto.community.ChattingDto">
+        SELECT m.mname , c.mmessage , c.cdate , c.mno
+        <!-- 검색 join 사용하여 member -> [ 이름 , 메세지 ]을 가져옴
+        채팅방 번호와 회원번호가 일치할시 가져옴 -->
+        FROM chatting c JOIN members m on c.mno = m.mno
+        WHERE c.bno = #{bno} and c.cdate >= #{joindate}  <!-- 소분모임 목록 번호와 채팅방에서 입력하려는 그 방과 같을때 -->
+        ORDER BY c.cdate ASC <!-- 최신순 -->
+    </select>
+
+    <!-- 인원 확인 -->
+    <select id="countChat" parameterType="int" resultType="web.model.dto.community.BulkbuygroupDto">
+        SELECT
+            bcount ,
+            btotal ,
+            mno AS host_mno
+        FROM bulkbuygroup
+        WHERE bno = #{bno};
+    </select>
+    
+    <!-- 인원 목록 조회 -->
+    <select id="playname" parameterType="int" resultType="web.model.dto.MemberDto">
+        SELECT
+            m.mno , m.mname
+        FROM
+            group_member gm JOIN members m ON gm.mno = m.mno
+        WHERE
+            gm.bno = #{bno}
+        AND gm.active = 1
+        ORDER BY m.mname
+    </select>
+
+    <!-- +1 -->
+    <update id="countpp" parameterType="int" >
+        UPDATE bulkbuygroup SET bcount = bcount + 1
+        WHERE bno = #{bno}
+    </update>
+
+    <!-- 인원 가득참 방지 -->
+    <select id="countCheck" parameterType="int">
+        SELECT * FROM bulkbuygroup where btotal > bcount and bno = #{bno};
+    </select>
+
+    <!-- -1 -->
+    <update id="countmm" parameterType="int">
+        UPDATE bulkbuygroup SET bcount = bcount - 1
+        WHERE bno = #{bno}
+    </update>
+
+    <!-- 인원 퇴장 -->
+    <select id="countCheckmm" parameterType="int">
+        SELECT * FROM bulkbuygroup WHERE btotal >= bcount and bno = #{bno}
+    </select>
+
+
+
+
+</mapper>

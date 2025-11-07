@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'NanumGothic';
+    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css') format('font-woff');
+    font-weight: normal;
+    font-display: swap;
+}
+*{ 
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    text-decoration: none;
+    }
+a:hover,
+a:visited,
+a:active {
+  color: black;
+  text-decoration: none;
+}    
+
+.tabBar{
+    height: 6.8vh;
+    background: rgb(77, 204, 255);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.icon{
+    width: 50px; height: 50px;
+    display: flex;
+}

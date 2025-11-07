@@ -1,0 +1,35 @@
+
+#linkBtn {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#linkBtn div {
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    background-color: rgb(236, 236, 236);
+    color: gray;
+    padding: 20px 40px;
+    margin-bottom: 60px;
+}
+
+#linkBtn #selected {
+    border-radius: 30px;
+    background-color: orange;
+    color: white;
+    padding: 20px 40px;
+    margin-bottom: 60px;
+}
+
+#mainMenu > div > input {
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding: 15px 20px;
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+.inputDiv {
+    margin-bottom: 15px;
+}

@@ -1,0 +1,35 @@
+#wrap > #container > #map{
+    height: 86vh;
+    display: flex;
+    justify-content: center;
+    position:relative;
+    z-index: 11;
+}
+
+#wrap > #container > #map #mapText{
+    position: absolute;
+    z-index: 10;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    font-size: 17px;
+}
+
+#mapLocation {
+  position: absolute;
+  bottom: 50px;
+  left: 10px;
+  width: 56px;
+  height: 56px;
+  z-index: 20; /* mapText보다 위에 뜨게 */
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+#mapLocation:hover {
+  background-color: rgb(228 248 251);
+  color: white;
+}

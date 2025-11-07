@@ -1,0 +1,65 @@
+
+#menuTop {
+    margin: 2vh 30px 2vh 30px;
+}
+
+#mypageTitle {
+    margin: 0 auto;
+    padding-bottom: 8px;
+    padding-left: 50px;
+}
+
+#profileBox {
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+    margin-bottom: 10vh;
+    border-top: 1px solid black;
+}
+
+#profileBox img {
+    width: 150px;
+}
+
+#profileName {
+    font-size: 22px;
+}
+
+.mypageTitle {
+    display: flex;
+    border-bottom: 1px solid rgb(77, 204, 255);
+    padding-bottom: 1vh;
+    margin-bottom: 2vh;
+    font-size: 20px;
+}
+
+.mypageTitle > span {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#activityBox {
+    margin: 10px;
+}
+
+#activityBox > ul {
+    display: flex;
+    flex-direction: column;
+}
+
+#activityBox > ul li {
+    height: 7vh;
+    display: flex;
+    align-items: center;
+}
+
+#activityBox > ul li > img {
+    margin-right: 20px;
+}
+

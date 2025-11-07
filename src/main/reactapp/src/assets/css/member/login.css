@@ -1,0 +1,49 @@
+
+#login {
+    height: 86vh;
+    text-align: center;
+    background-color: rgb(248, 248, 248);
+}
+
+#contentTop {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    margin: 2vh 30px 7vh 30px;
+}
+
+h2 {
+    color: deepskyblue;
+    margin-bottom: 60px;
+}
+
+.input {
+    border: none;
+    border-bottom: 1px solid gray;
+    font-size: 22px;
+    padding: 10px;
+    margin: 5px;
+    background: none;
+}
+
+#linkMenu {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button {
+    width: 300px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #1e90ff;
+    font-size: 18px;
+    color: white;
+    margin-top: 25px;
+}
+
+#ask {
+    text-align: end;
+    margin: 30px;
+}

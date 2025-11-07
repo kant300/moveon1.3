@@ -1,0 +1,170 @@
+/* 기본 설정 */
+@font-face {
+    font-family: 'NanumGothic';
+    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css') format('font-woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+li{
+    list-style:none;
+}
+body {
+    background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+    font-family: 'NanumGothic';
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 헤더 텍스트 */
+h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: 'NanumGothic';
+}
+
+/* 구분선 */
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* 공통 박스 레이아웃 */
+.addWrap, .printWrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.addContainer, .printContainer {
+    width: 100%;
+    max-width: 100vh;
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 폼 구성 */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'NanumGothic';
+}
+
+textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* 버튼 */
+button {
+    background-color: #4dc3ff;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+button:hover {
+    background-color: #00b0ff;
+    transform: translateY(-2px);
+}
+.pageBtnBox{
+        display: flex
+;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.pageBtnBox .pageBtn a {
+    color:white;
+}
+
+.pageBtnBox .pageBtn a{
+    background-color: #4dc3ff;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    
+}
+
+.pageBtnBox .pageBtn:hover {
+    background-color: #00b0ff;
+    transform: translateY(-2px);
+}
+/* 테이블 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 20px;
+    background: #fff;
+}
+
+thead {
+    background-color: #4dc3ff;
+    color: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px 8px;
+    text-align: center;
+}
+
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #e0f7fa;
+}
+
+/* 조회정보 사진 크기 조정 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 썸머노트 */
+.note-editor.note-frame {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}

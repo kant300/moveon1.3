@@ -1,0 +1,12 @@
+
+.buttonDiv {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button_small {
+    background-color: lightskyblue;
+    color: white;
+    margin-right: 20px;
+    font-weight: normal;
+}

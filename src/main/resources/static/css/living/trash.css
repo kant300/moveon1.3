@@ -1,0 +1,24 @@
+
+*{
+    font-family: 'NanumGothic';
+}
+
+/* 조회정보 사진 크기 조정 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* 기준 잡기 */
+}
+.floating-icon {
+    position: absolute;
+    bottom: 16px;
+    right: 16px; 
+    z-index: 1000;
+}
