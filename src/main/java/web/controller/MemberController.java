@@ -1,12 +1,9 @@
 package web.controller;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.apache.hc.core5.http.HttpStatus;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.model.dto.MemberDto;
@@ -17,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 
 @RestController
 @RequestMapping("/api/member")  // 공통URL 정의
@@ -35,62 +31,30 @@ public class MemberController {
         return ResponseEntity.ok( result );
     }
 
-    // 2-2. 로그인(+쿠키 : 클라이언트 브라우저 의 임시 저장소 , 세션:서버 / 쿠키:클라이언트  ) + 토큰
+    // 2-2. 로그인
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody MemberDto memberDto , HttpServletResponse response ){
+    public ResponseEntity<?> login(@RequestBody MemberDto memberDto  ){
         MemberDto result = memberService.login( memberDto );
-
         if( result != null ){
-            // ******* 쿠키에 저장하는 회원정보를 토큰으로 저장하기 *********
-            Cookie cookie = new Cookie( "loginMember", jwtService.createToken( result.getMid() ) );
+            String token = jwtService.createToken()
 
-            // 클라이언트 에서 해당 쿠키를 노출(탈취) 방지 = 주로 민감한정보는 httpOnly 설정한다.
-            cookie.setHttpOnly( true ); // .setHttpOnly( true ) : 무조건 http 에서만 사용. 즉] JS로 접근 불가능
-            cookie.setSecure( false ); //  HTTP 암호화 : 단 https(true) 에서만 가능 하므로 테스트 단계에서는 false 한다.
-            // + 설정
-            cookie.setPath("/"); // 쿠키에 접근할수 있는 경로
-            cookie.setMaxAge( 60 * 60 ); // 쿠키의 유효기간(초) , 1시간
-            response.addCookie( cookie ); // 생성한 쿠키를 클라이언트에게 반환한다.
+
+
         }
         return ResponseEntity.ok( result );
     }
 
     // 3. 현재 로그인된 정보 호출 ( + 마이페이지 )
     @GetMapping("/info")
-    public ResponseEntity<?> myInfo( HttpServletRequest request ){ // 쿠키 활용한 로그인상태를 확인
-        // 3-1 : 현재 클라이언트(브라우저) 저장된 모든 쿠키 가져오기
-        Cookie[] cookies = request.getCookies();
-        // 3-2 : 반복문 이용한 특정한 쿠키명 찾기
-        if( cookies != null ){ // 만약에 쿠키들이 존재하면
-            for( Cookie c : cookies ){ // 하나씩 쿠키들을 반복하여
-                if( c.getName().equals( "loginMember") ){ // "loginMember" 쿠키명과 같다면
-                    // ******* 쿠키의 저장된 토큰 반환 하기 *********
-                    String token = c.getValue();// 쿠키의 저장된 토큰 반환
-                    boolean checked = jwtService.checkToken( token ); // 토큰 검증
-                    if( checked ) {// 만약에 토큰이 유효하면
-                        String mid =jwtService.getMid( token ); // 토큰의 저장된 클레임(회원아이디) 추출하기
-                        // 3-3 : 서비스를 호출하여 내정보 조회
-                        MemberDto result = memberService.myInfo( mid );
-                        return ResponseEntity.ok( result ); // 로그인 상태로 회원정보 조회
-                    }//
-                    // 만약에 토큰이 유효하지 않으면
-                    return ResponseEntity.ok( null ); // 토큰 검증 실패
-                }
-            }
-        }
-        return ResponseEntity.ok( null ); // 비로그인 상태 // 쿠키가 없다.
+    public ResponseEntity<?> myInfo( ){
+
+
     }
 
     // 4. 로그아웃
     @GetMapping("/logout")
     public ResponseEntity<?> logout( HttpServletResponse response ){
         // 4-1 : 삭제할 쿠키명을 null 값으로 변경한다.
-        Cookie cookie = new Cookie( "loginMember" , null );
-        cookie.setHttpOnly( true );
-        cookie.setSecure( false );
-        cookie.setPath("/");
-        cookie.setMaxAge( 0 ); // 즉시 삭제 하라는 뜻 : 0초
-        response.addCookie( cookie ); // 동일한 쿠키명으로 null 저장하면 기존 쿠키명 사라진다.
 
         return ResponseEntity.ok( true );
     }
