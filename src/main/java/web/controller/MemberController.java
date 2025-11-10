@@ -35,18 +35,27 @@ public class MemberController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody MemberDto memberDto  ){
         MemberDto result = memberService.login( memberDto );
-        if( result != null ){
-            String token = jwtService.createToken()
+        if( result != null ) {
+            String token = jwtService.createToken(result.getMid(), "LoginMno");
 
-
-
+            Map<String, Object> map = new HashMap<>();
+            map.put("status", "Login");
+            map.put("token", token);
+            map.put("member", result);
+            return ResponseEntity.ok(map);
         }
-        return ResponseEntity.ok( result );
+            Map<String, Object> map = new HashMap<>();
+        map.put("status", "UnLogin");
+        map.put("message" , "로그인 실패요");
+        return ResponseEntity.status(403).body(map);
     }
 
     // 3. 현재 로그인된 정보 호출 ( + 마이페이지 )
     @GetMapping("/info")
-    public ResponseEntity<?> myInfo( ){
+    public ResponseEntity<?> myInfo(@RequestBody String header){
+        if( header == null ) {
+            return ResponseEntity.status().body(Map.of())
+        }
 
 
     }
@@ -54,8 +63,6 @@ public class MemberController {
     // 4. 로그아웃
     @GetMapping("/logout")
     public ResponseEntity<?> logout( HttpServletResponse response ){
-        // 4-1 : 삭제할 쿠키명을 null 값으로 변경한다.
-
         return ResponseEntity.ok( true );
     }
 
