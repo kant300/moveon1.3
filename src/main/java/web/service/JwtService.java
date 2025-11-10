@@ -22,9 +22,10 @@ public class JwtService {
 
     // [3] 토큰 함수
     // [3-1] 토큰 생성 : 회원로그인정보 전용( 아이디, 권한 )
-    public String createToken(String mid ) {
+    public String createToken(String mid , String mrole) {
         String token = Jwts.builder() // 토큰객체 생성 빌더 함수 시작
                 .claim("mid", mid) // mid 라는 key의 로그인성공한 회원아이디 저장
+                .claim("mrole", mrole)
                 .setIssuedAt(new Date()) // 발급 날짜/시간 , 현재 시스템(pc) 날짜/시간
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1시간
                 .signWith(secretKey, SignatureAlgorithm.HS256) // HS256 서명 알고리즘 적용
@@ -55,5 +56,10 @@ public class JwtService {
     public String getMid( String token ){
         return getClaims( token ).get( "mid" , String.class );
     }
+
+    public String getMrole(String token) {
+        return getClaims(token).get("mrole", String.class);
+    }
+
 
 } // class end

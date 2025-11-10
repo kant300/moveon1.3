@@ -52,18 +52,31 @@ public class MemberController {
 
     // 3. 현재 로그인된 정보 호출 ( + 마이페이지 )
     @GetMapping("/info")
-    public ResponseEntity<?> myInfo(@RequestBody String header){
-        if( header == null ) {
-            return ResponseEntity.status().body(Map.of())
+    public ResponseEntity<?> myInfo(@RequestBody String tokens){
+        // 토큰s가 비어있거나 / 형식이 잘못된 경우
+        if( tokens == null || !tokens.startsWith("Bearer ") ) {
+            return ResponseEntity.status(401).body("정보 호출 실패");
+        }
+        // token 에 값 받아오면 문자열 만큼 뒷자리 자름 7자리
+        String token = tokens.substring("Bearer ".length());
+        String mid = jwtService.getMid(token); // token mid 값 추출
+        MemberDto member = memberService.getMemberById(mid); // 추출한 mid member 조회
+        return ResponseEntity.ok(member);
         }
 
 
-    }
 
     // 4. 로그아웃
     @GetMapping("/logout")
-    public ResponseEntity<?> logout( HttpServletResponse response ){
-        return ResponseEntity.ok( true );
+    public ResponseEntity<?> logout( String tokens ){
+        // 토큰이 비어있거나 형식이 잘못된 경우
+        if (tokens == null || !tokens.startsWith("Bearer ") ) {
+            return ResponseEntity.status(403).body(Map.of( "LogOutFail" , "로그아웃 실패 "));
+        }
+        // 토큰 7자리 이후 자름
+        String token = tokens.substring("Bearer ".length());
+        // 맞으면 성공
+        return ResponseEntity.ok(Map.of("Logout" , "로그아웃성공 "));
     }
 
     // 5. 아이디찾기

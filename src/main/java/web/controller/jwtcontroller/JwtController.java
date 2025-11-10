@@ -4,7 +4,7 @@ package web.controller.jwtcontroller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import web.service.jwtservice.JwtService;
+import web.service.JwtService;
 
 import java.util.Map;
 
@@ -27,8 +27,8 @@ public class JwtController {
 
     // 토큰 검증
     @GetMapping("/read")
-    public ResponseEntity< ? > tokencheck(@RequestParam String token){
-        boolean result = jwtService.tokencheck(token);
+    public ResponseEntity< ? > checkToken(@RequestParam String token){
+        boolean result = jwtService.checkToken(token);
         return ResponseEntity.ok(result);
     }
 
