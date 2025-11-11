@@ -54,11 +54,16 @@ public class MemberService {
     } // m end
 
     // 3. 내 정보 조회
-    public MemberDto myInfo( String mid ){
-        MemberDto result = memberMapper.myInfo( mid );
-        return result;
+    public MemberDto myInfo( String tokens ){
+        if ( tokens == null || !tokens.startsWith("Bearer ") ){
+            return null; }
+        String token = tokens.substring("Bearer ".length());
+        String mid = jwtService.getMid( token );
+        MemberDto memberDto = memberMapper.myInfo(mid);
+        return memberDto;
     }
-
+/*
+    Cookie 기반 http
     // 4. ** request 를 넣으면 회원정보 반환하는 함수**
     public MemberDto myInfo(HttpServletRequest request ){ // 쿠키 활용한 로그인상태를 확인
 
@@ -84,6 +89,8 @@ public class MemberService {
         }
         return null;
     }
+    */
+
     // 5.아이디찾기
     public String findId(MemberDto dto){
         System.out.println("[Service] findId 요청 DTO (이메일): " + dto.getMemail());

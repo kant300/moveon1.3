@@ -52,7 +52,7 @@ public class MemberController {
 
     // 3. 현재 로그인된 정보 호출 ( + 마이페이지 )
     @GetMapping("/info")
-    public ResponseEntity<?> myInfo(@RequestBody String tokens){
+    public ResponseEntity<?> myInfo(@RequestHeader("Authorization") String tokens){
         // 토큰s가 비어있거나 / 형식이 잘못된 경우
         if( tokens == null || !tokens.startsWith("Bearer ") ) {
             return ResponseEntity.status(401).body("정보 호출 실패");
@@ -68,7 +68,7 @@ public class MemberController {
 
     // 4. 로그아웃
     @GetMapping("/logout")
-    public ResponseEntity<?> logout( String tokens ){
+    public ResponseEntity<?> logout(@RequestHeader("Authorization") String tokens ){
         // 토큰이 비어있거나 형식이 잘못된 경우
         if (tokens == null || !tokens.startsWith("Bearer ") ) {
             return ResponseEntity.status(403).body(Map.of( "LogOutFail" , "로그아웃 실패 "));
@@ -153,39 +153,38 @@ public class MemberController {
     }
     // 7-1 비밀번호 변경
     @PutMapping("/updatePwd")
-    public boolean updatePwd(@RequestBody MemberDto dto, HttpSession session ){
-        MemberDto loginMember = (MemberDto) session.getAttribute("loginMember");
-        if( loginMember == null ) return false; // 로그인 안된 경우
+    public ResponseEntity< ? > updatePwd(@RequestBody MemberDto dto ,@RequestHeader("Authorization") String tokens){
+        if (tokens == null || !tokens.startsWith("Bearer ") ){
+            return ResponseEntity.status(403).body("비밀번호 변경 실패");
+        }
+        String token = tokens.substring("Bearer ".length());
+        String mid = jwtService.getMid(token);
 
         // DB의 회원정보 가져오기
-        MemberDto dbMember = memberService.getMemberById(loginMember.getMid());
-        if( dbMember == null ) return false;
-
+        MemberDto dbMember = memberService.getMemberById(mid);
+        if( dbMember == null ){
+            return ResponseEntity.status(403).body("회원정보 불러오기 실패");
+        }
         // 기존 비밀번호 일치여부확인(암호화 비교)
         if(!passwordEncoder.matches(dto.getMpwd(), dbMember.getMpwd())){
-            return false;
+            return ResponseEntity.status(403).body("기존비밀번호 일치 X");
         }
-
         // 새 비밀번호 암호화 후 DB 업데이트
         String encodedNewPwd = passwordEncoder.encode(dto.getNewPwd());
-        boolean result = memberService.updatePassword(loginMember.getMid(), encodedNewPwd);
-
-        // 세션 갱신
-        if (result){
-            dbMember.setMpwd(dto.getNewPwd());
-            session.setAttribute("loginMember" , dbMember);
-        }
-        return result;
+        boolean result = memberService.updatePassword(mid, encodedNewPwd);
+        return ResponseEntity.status(200).body(result);
     }
 
 
     // 8. 회원탈퇴
     @DeleteMapping("/signout")
-    public ResponseEntity<?> signout(HttpServletRequest request){
-        MemberDto loginMember = memberService.myInfo(request);
-        if(loginMember == null) return ResponseEntity.ok(false);
-
-        boolean result = memberService.signout(loginMember.getMid());
+    public ResponseEntity<?> signout(@RequestHeader("Authorization") String tokens){
+        if (tokens == null || !tokens.startsWith("Bearer ") ) {
+            return ResponseEntity.status(403).body("회원탈퇴 실패");
+        }
+        String token = tokens.substring("Bearer ".length());
+        String mid  = jwtService.getMid(token);
+        boolean result = memberService.signout(mid);
         return ResponseEntity.ok(result);
     }
 }// class e
