@@ -22,9 +22,9 @@ public class BulkbuygroupController {
 
     // 글쓰기
     @PostMapping("/create")
-    public ResponseEntity< ? > createGroup(@RequestBody BulkbuygroupDto dto , HttpServletRequest request){
+    public ResponseEntity< ? > createGroup(@RequestBody BulkbuygroupDto dto , @RequestHeader("Authorization") String tokens){
 
-        MemberDto memberDto = memberService.myInfo(request);
+        MemberDto memberDto = memberService.myInfo(tokens);
 
         if (memberDto == null){
             ResponseEntity.status(403).body("로그인 바람");
