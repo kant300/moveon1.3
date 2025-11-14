@@ -62,8 +62,7 @@ public class MemberService {
         MemberDto memberDto = memberMapper.myInfo(mid);
         return memberDto;
     }
-/*
-    Cookie 기반 http
+
     // 4. ** request 를 넣으면 회원정보 반환하는 함수**
     public MemberDto myInfo(HttpServletRequest request ){ // 쿠키 활용한 로그인상태를 확인
 
@@ -89,7 +88,7 @@ public class MemberService {
         }
         return null;
     }
-    */
+
 
     // 5.아이디찾기
     public String findId(MemberDto dto){
