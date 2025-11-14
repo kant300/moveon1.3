@@ -23,9 +23,9 @@ public class ChatController {
 
     // 메세지 내용 저장 (DB 저장)
     @PostMapping("/write")
-    public ResponseEntity<?> writeChat(@RequestBody ChattingDto dto, HttpServletRequest request) {
+    public ResponseEntity<?> writeChat(@RequestBody ChattingDto dto, @RequestHeader("Authorization") String tokens) {
 
-        MemberDto memberDto = memberService.myInfo(request);
+        MemberDto memberDto = memberService.myInfo(tokens);
 
         dto.setMno(memberDto.getMno());
         System.out.println("memberDto = " + memberDto);
@@ -36,11 +36,11 @@ public class ChatController {
 
     // 메세지 내용 출력 어디에? 메세지 입력한 방(cno)에
     @GetMapping("/print")
-    public ResponseEntity<?> printChat(@RequestParam int bno , HttpServletRequest request ) {
+    public ResponseEntity<?> printChat(@RequestParam int bno , @RequestHeader("Authorization") String tokens ) {
         System.out.println("ChatController.printChat");
 
         // 현재 접속한 회원의 접속날짜/시간 가져오기
-        MemberDto memberDto = memberService.myInfo( request );
+        MemberDto memberDto = memberService.myInfo( tokens );
         int mno = memberDto.getMno();
 
         // ----> 해당 회원이 그룹방에 접속한 날짜/ 시간 구하기

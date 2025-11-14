@@ -103,8 +103,16 @@ public class MemberController {
     // 6. 비밀번호찾기/재설정
     @PutMapping("/findpwd") // http://localhost:8080/api/member/findpwd  //
     public ResponseEntity<?> findPwd(@RequestBody MemberDto dto){
+        Map<String, Object> response = new HashMap<>();
         boolean result = memberService.findPwd(dto);
-        return ResponseEntity.ok(result);
+        if(result == true) {
+            response.put("success" , true);
+            response.put("message", "비밀번호가 변경되었습니다.");
+        }else {
+            response.put("success" , false);
+            response.put("message", "비밀번호 변경 실패");
+        }
+        return ResponseEntity.ok(response);
     }
 
 
@@ -121,7 +129,7 @@ public class MemberController {
         } else {
             response.put("success", false);
             response.put("message", "회원 정보를 찾을 수 없습니다.");
-            return ResponseEntity.status(400).body(response);
+            return ResponseEntity.ok(response);
         }
     }
 
@@ -141,7 +149,7 @@ public class MemberController {
         } else {
             response.put("success", false);
             response.put("message", "인증번호가 일치하지 않습니다.");
-            return ResponseEntity.status(400).body(response);
+            return ResponseEntity.ok(response);
         }
     }
 
@@ -154,8 +162,9 @@ public class MemberController {
     // 7-1 비밀번호 변경
     @PutMapping("/updatePwd")
     public ResponseEntity< ? > updatePwd(@RequestBody MemberDto dto ,@RequestHeader("Authorization") String tokens){
+        Map<String , Object> maps = new HashMap<>();
         if (tokens == null || !tokens.startsWith("Bearer ") ){
-            return ResponseEntity.status(403).body("비밀번호 변경 실패");
+            return ResponseEntity.ok("비밀번호 변경 실패");
         }
         String token = tokens.substring("Bearer ".length());
         String mid = jwtService.getMid(token);
@@ -163,16 +172,27 @@ public class MemberController {
         // DB의 회원정보 가져오기
         MemberDto dbMember = memberService.getMemberById(mid);
         if( dbMember == null ){
-            return ResponseEntity.status(403).body("회원정보 불러오기 실패");
+            maps.put("success" , false);
+            maps.put("message" , "회원정보 불러오기 실패");
+            return ResponseEntity.ok(maps);
         }
         // 기존 비밀번호 일치여부확인(암호화 비교)
         if(!passwordEncoder.matches(dto.getMpwd(), dbMember.getMpwd())){
-            return ResponseEntity.status(403).body("기존비밀번호 일치 X");
+            maps.put("success" , false);
+            maps.put("message" , "기존비밀번호 일치 X");
+            return ResponseEntity.ok(maps);
         }
         // 새 비밀번호 암호화 후 DB 업데이트
         String encodedNewPwd = passwordEncoder.encode(dto.getNewPwd());
         boolean result = memberService.updatePassword(mid, encodedNewPwd);
-        return ResponseEntity.status(200).body(result);
+        if (result) {
+            maps.put("success", true);
+            maps.put("message", "비밀번호 변경 성공");
+        }else {
+            maps.put("success", false);
+            maps.put("message", "비밀번호 변경 실패");
+        }
+        return ResponseEntity.ok(maps);
     }
 
 
