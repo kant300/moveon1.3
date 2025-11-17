@@ -38,15 +38,15 @@ public interface MemberMapper {
 
     // 6. 회원정보 수정
     @Update("update members set mname = #{mname}, memail = #{memail}, mphone=#{mphone}, " +
-            "maddress1 = #{maddress1}, maddress2 = #{maddress2}, maddress3 = #{maddress3}, mpwd = #{mpwd} " +
+            "maddress1 = #{maddress1}, maddress2 = #{maddress2}, maddress3 = #{maddress3} " +
             "where mid = #{mid}")
     int updateInfo(MemberDto dto);
 
     // 비밀번호 변경
-    @Update("UPDATE member SET mpwd = #{encodedPwd}, mdateup = now() WHERE mid = #{mid}")
-    int updatePassword(@Param("mid") String mid, @Param("newPwd") String newPwd);
+    @Update("UPDATE members SET mpwd = #{encodedPwd}, mdateup = now() WHERE mid = #{mid}")
+    int updatePassword(@Param("mid") String mid, @Param("encodedPwd") String newPwd);
 
-    @Select("SELECT * FROM member WHERE mid = #{mid}")
+    @Select("SELECT * FROM members WHERE mid = #{mid}")
     MemberDto getMemberById(String mid);
 
     // 7. 회원탈퇴
