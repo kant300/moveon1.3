@@ -141,7 +141,6 @@ public class MemberService {
 
     // 7. 회원정보수정
     public boolean updateInfo(MemberDto dto) {
-        dto.setMpwd(bcrypt.encode(dto.getMpwd()));  // 암호화
         return memberMapper.updateInfo(dto) > 0;
     }
     // 7-1. 비밀번호 변경
