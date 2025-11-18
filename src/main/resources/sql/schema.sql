@@ -77,3 +77,16 @@ CREATE TABLE group_member (
         REFERENCES bulkbuygroup(bno)
         ON DELETE CASCADE
 );
+
+CREATE TABLE guest_user (
+	fno INT AUTO_INCREMENT PRIMARY KEY,  -- 고유 번호
+	mno int null , -- 회원
+	guestKey varchar(100) not null UNIQUE,
+	gaddress1 varchar(100),
+	gaddress2 varchar(100),
+	gaddress3 varchar(100),
+	wishlist varchar(50) null, -- 관심 내역
+	createdDate DATETIME DEFAULT CURRENT_TIMESTAMP, -- 생성일
+	updatedDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 수정일
+	UNIQUE KEY uq_member (mno , wishlist)        -- 회원 중복 방지
+);
