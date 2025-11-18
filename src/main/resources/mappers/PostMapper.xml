@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
 
-<!-- PostMapper 인터페이스와 연결 -->
-<mapper namespace="com.example.community.mapper.PostMapper">
+<!--&lt;!&ndash; PostMapper 인터페이스와 연결 &ndash;&gt;-->
+<!--<mapper namespace="com.example.community.mapper.PostMapper">-->
 
-    <!-- 1. 게시글 저장 쿼리 -->
-    <!-- useGeneratedKeys와 keyProperty를 사용하여 DB가 생성한 ID를 Post 객체의 id 필드에 주입 -->
-    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO post
-            (category, title, content, mid, created_at)
-        VALUES
-            (#{category}, #{title}, #{content}, #{mid} , NOW() )
-    </insert>
+<!--    &lt;!&ndash; 1. 게시글 저장 쿼리 &ndash;&gt;-->
+<!--    &lt;!&ndash; useGeneratedKeys와 keyProperty를 사용하여 DB가 생성한 ID를 Post 객체의 id 필드에 주입 &ndash;&gt;-->
+<!--    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">-->
+<!--        INSERT INTO post-->
+<!--            (category, title, content, mid, created_at)-->
+<!--        VALUES-->
+<!--            (#{category}, #{title}, #{content}, #{mid} , NOW() )-->
+<!--    </insert>-->
 
-    <!-- 2. 모든 게시글 조회 쿼리 -->
-    <select id="findAllPosts" resultType="Post">
-        SELECT
-            id,
-            category,
-            title,
-            content,
-            mid,
-            created_at AS createdAt <!-- createdAt 필드명 매핑 -->
-        FROM
-            post
-        ORDER BY
-            id DESC
-    </select>
-</mapper>
+<!--    &lt;!&ndash; 2. 모든 게시글 조회 쿼리 &ndash;&gt;-->
+<!--    <select id="findAllPosts" resultType="Post">-->
+<!--        SELECT-->
+<!--            id,-->
+<!--            category,-->
+<!--            title,-->
+<!--            content,-->
+<!--            mid,-->
+<!--            created_at AS createdAt &lt;!&ndash; createdAt 필드명 매핑 &ndash;&gt;-->
+<!--        FROM-->
+<!--            post-->
+<!--        ORDER BY-->
+<!--            id DESC-->
+<!--    </select>-->
+<!--</mapper>-->
