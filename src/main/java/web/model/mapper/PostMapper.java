@@ -12,12 +12,12 @@
 //     * 새 게시글을 데이터베이스에 저장합니다.
 //     * 게시글 저장 후, MyBatis가 Post 객체에 자동 생성된 ID를 채워줍니다.
 //     */
-//     void insertPost(Post post);
+//    void insertPost(Post post);
 //
 //    /**
 //     * 모든 게시글 목록을 조회합니다.
 //     */
-//     List<Post> findAllPosts();
+//    List<Post> findAllPosts();
 //
 //
 //}
