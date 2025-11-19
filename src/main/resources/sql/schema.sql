@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS group_member;
 DROP TABLE IF EXISTS chatting;
 DROP TABLE IF EXISTS bulkbuygroup;
 DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS guest_user;
 
 CREATE TABLE members (
     mno INT AUTO_INCREMENT PRIMARY KEY,        -- 회원번호
