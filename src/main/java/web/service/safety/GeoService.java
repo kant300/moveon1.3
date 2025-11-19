@@ -29,10 +29,23 @@ public class GeoService {
 
         // ★ 간단한 JSON 파싱 (실서비스에서는 DTO 매핑 권장)
         String body = response.getBody();
+        System.out.println("body = " + body);
 
-        String sido = extract(body, "\"region_1depth_name\":\"", "\"");
-        String sigungu = extract(body, "\"region_2depth_name\":\"", "\"");
-        String dong = extract(body, "\"region_3depth_name\":\"", "\"");
+        // 1. 지번 주소 블록 전체를 먼저 추출합니다.
+        String addressBlock = extract(body, "\"address\":{", "}}]}");
+
+        // 2. 시도, 시군구는 도로명 주소(road_address)에서 가져와도 무방하거나,
+        //    addressBlock에서 가져옵니다. 여기서는 addressBlock에서 추출합니다.
+        String sido = extract(addressBlock, "\"region_1depth_name\":\"", "\"");
+        String sigungu = extract(addressBlock, "\"region_2depth_name\":\"", "\"");
+
+        // 3. 읍면동(dong)을 addressBlock 내에서 추출합니다.
+        String dong = extract(addressBlock, "\"region_3depth_name\":\"", "\"");
+
+        System.out.println("sido = " + sido);
+        System.out.println("sigungu = " + sigungu);
+        System.out.println("dong = " + dong);
+
 
         return new RegionInfo(sido, sigungu, dong);
     }
