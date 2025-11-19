@@ -72,9 +72,29 @@ public class SexCrimeService {
         }
     }
 
+    // 행정구역별 카운트
+    public Map<String, Long> countByRegion(String sido, String sigungu, String dong) {
+        long sidoCount = crimeList.stream()
+                .filter(c -> c.getChgBfrCtpvNm().equals(sido))
+                .count();
 
-    public List<SexCrimeDto> getAllSexCrime() {
-        return crimeList;
+        long sigunguCount = crimeList.stream()
+                .filter(c -> c.getChgBfrCtpvNm().equals(sido))
+                .filter(c -> c.getChgBfrSggNm().equals(sigungu))
+                .count();
+
+        long dongCount = crimeList.stream()
+                .filter(c -> c.getChgBfrCtpvNm().equals(sido))
+                .filter(c -> c.getChgBfrSggNm().equals(sigungu))
+                .filter(c -> c.getChgBfrUmdNm().equals(dong))
+                .count();
+
+        Map<String, Long> result = new HashMap<>();
+        result.put("sidoCount", sidoCount);
+        result.put("sigunguCount", sigunguCount);
+        result.put("dongCount", dongCount);
+
+        return result;
     }
 
 }
