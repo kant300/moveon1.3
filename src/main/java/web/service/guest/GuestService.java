@@ -19,7 +19,16 @@ public class GuestService {
                 guestKey ,
                 guestDto.getGaddress1() ,
                 guestDto.getGaddress2() ,
-                guestDto.getGaddress3() ,
+                guestDto.getGaddress3());
+    }
+
+    public void guestDwishlist(String guestKey ,GuestDto guestDto){
+        guestMapper.guestDwishlist(
+                guestKey ,
                 guestDto.getWishlist());
+    }
+
+    public GuestDto guestAddress(String guestKey){
+        return guestMapper.guestAddress(guestKey);
     }
 }

@@ -26,7 +26,7 @@ public class GuestController {
         String token = jwtService.createguestToken(guestKey);
         return ResponseEntity.ok(Map.of("token",token));
     }
-    // guest address / wishlist 저장
+    // guest address /  저장
     @PostMapping("/detail")
     public ResponseEntity< ? > guestDetail(@RequestHeader("Authorization") String tokens, @RequestBody GuestDto guestDto){
 
@@ -37,6 +37,30 @@ public class GuestController {
         System.out.println("guestKey = " + guestKey);
 
         return ResponseEntity.ok(true);
+    }
+
+    // guest  / wishlist 저장
+    @PostMapping("/wishlist")
+    public ResponseEntity< ? > guestDwishlist(@RequestHeader("Authorization") String tokens, @RequestBody GuestDto guestDto){
+
+        String token = tokens.replace("Bearer ", "");
+        String guestKey = jwtService.getGuestKey(token);
+
+        guestService.guestDwishlist(guestKey , guestDto);
+        System.out.println("guestKey = " + guestKey);
+
+        return ResponseEntity.ok(true);
+    }
+
+    // 설정 끝난 후 주솣 ㅜㄹ력
+    @GetMapping("/address")
+    public ResponseEntity< ? > guestAddress(@RequestHeader("Authorization") String tokens){
+        String token = tokens.replace("Bearer ", "");
+        String guestKey = jwtService.getGuestKey(token);
+
+        GuestDto dto = guestService.guestAddress(guestKey);
+
+        return ResponseEntity.ok(dto);
     }
 
 }
