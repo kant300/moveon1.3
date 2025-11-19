@@ -60,7 +60,7 @@ public class AmbulanceService {
                     // -----------------------
                     AmbulanceDto dto = new AmbulanceDto(
                             d[0],  // 시도
-                            d[1],  // 지역
+                            d[1],  // 구/군
                             d[2],  // 주소
                             d[3],  // 업체명
                             d[4],  // 특수

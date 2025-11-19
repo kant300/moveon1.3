@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor@AllArgsConstructor
 public class AmbulanceDto {
     private String 시도;              // 시·도
-    private String 지역;              // 지역(시군구)
+    private String 구군;              // 지역(시군구)
     private String 주소;              // 상세 주소
     private String 업체명;            // 병원/기관/업체명
     private String 특수;              // 특수구급차 수
