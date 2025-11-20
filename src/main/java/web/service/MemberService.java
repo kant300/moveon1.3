@@ -143,6 +143,14 @@ public class MemberService {
     public boolean updateInfo(MemberDto dto) {
         return memberMapper.updateInfo(dto) > 0;
     }
+
+    // 즐겨찾기 수정
+    public boolean updateWishlist(String mid, String wishlist) {
+        return memberMapper.updateWishlist(mid, wishlist) > 0;
+    }
+
+
+
     // 7-1. 비밀번호 변경
     public MemberDto getMemberById(String mid) {
         return memberMapper.getMemberById(mid);

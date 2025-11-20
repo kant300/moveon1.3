@@ -11,8 +11,8 @@ import static java.time.LocalTime.now;
 @Repository
 public interface MemberMapper {
     // 1. 회원가입
-    @Insert("insert into members( mid, mpwd, mname, mphone, memail, maddress1, maddress2, maddress3 ) " +
-            "values ( #{mid}, #{mpwd}, #{mname}, #{mphone}, #{memail}, #{maddress1}, #{maddress2}, #{maddress3} )")
+    @Insert("insert into members( mid, mpwd, mname, mphone, memail, maddress1, maddress2, maddress3 , wishlist) " +
+            "values ( #{mid}, #{mpwd}, #{mname}, #{mphone}, #{memail}, #{maddress1}, #{maddress2}, #{maddress3} , #{wishlist} )")
     @Options( useGeneratedKeys = true , keyProperty = "mno" )
     public int signup(MemberDto memberDto);
 
@@ -35,6 +35,11 @@ public interface MemberMapper {
     // 5-1. 비밀번호 찾기용 회원 존재 여부 확인
     @Select("SELECT COUNT(*) FROM members WHERE mid = #{mid} AND memail = #{memail}")
     int existsByMidAndEmail(MemberDto dto);
+
+    // 즐겨찾기 수정
+    @Update("UPDATE members SET wishlist = #{wishlist} WHERE mid = #{mid}")
+    int updateWishlist(@Param("mid") String mid, @Param("wishlist") String wishlist);
+
 
     // 6. 회원정보 수정
     @Update("update members set mname = #{mname}, memail = #{memail}, mphone=#{mphone}, " +

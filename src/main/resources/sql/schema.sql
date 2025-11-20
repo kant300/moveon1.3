@@ -18,6 +18,7 @@ CREATE TABLE members (
     maddress1 VARCHAR(50) NOT NULL,            -- 주소(시)
     maddress2 VARCHAR(50) NOT NULL,            -- 주소(구)
     maddress3 VARCHAR(50) NOT NULL,            -- 주소(동)
+    wishlist VARCHAR(100) NOT NULL,            -- 관심
     mdate DATE DEFAULT (CURRENT_DATE),         -- 날짜(생성)
     mdateup DATE DEFAULT (CURRENT_DATE)        -- 날짜(수정)
 );
