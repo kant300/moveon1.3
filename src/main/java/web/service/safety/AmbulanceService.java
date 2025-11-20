@@ -59,16 +59,16 @@ public class AmbulanceService {
                     // 4) 최종 DTO 생성
                     // -----------------------
                     AmbulanceDto dto = new AmbulanceDto(
-                            d[0],  // 시도
-                            d[1],  // 구/군
-                            d[2],  // 주소
-                            d[3],  // 업체명
-                            d[4],  // 특수
-                            d[5],  // 일반
-                            d[6],  // 연락처
-                            d[7],  // 담당과
-                            d[8],  // 담당팀
-                            d[9]   // 담당자연락처
+                            d[0],  // province, 시도
+                            d[1],  // region, 구/군
+                            d[2],  // address, 주소
+                            d[3],  // companyName, 업체명
+                            d[4],  // special, 특수
+                            d[5],  // general, 일반
+                            d[6],  // contact, 연락처
+                            d[7],  // department, 담당과
+                            d[8],  // team, 담당팀
+                            d[9]   // officerContact, 담당자연락처
                     );
 
                     ambulanceList.add(dto);
