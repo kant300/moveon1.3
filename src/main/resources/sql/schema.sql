@@ -15,10 +15,10 @@ CREATE TABLE members (
     mname VARCHAR(100) NOT NULL,               -- 닉네임
     mphone VARCHAR(20) NOT NULL UNIQUE,        -- 휴대번호
     memail VARCHAR(100) NOT NULL UNIQUE,       -- 이메일
-    maddress1 VARCHAR(50) NOT NULL,            -- 주소(시)
-    maddress2 VARCHAR(50) NOT NULL,            -- 주소(구)
-    maddress3 VARCHAR(50) NOT NULL,            -- 주소(동)
-    wishlist VARCHAR(100) NOT NULL,            -- 관심
+    maddress1 VARCHAR(50) NULL,            -- 주소(시)
+    maddress2 VARCHAR(50) NULL,            -- 주소(구)
+    maddress3 VARCHAR(50) NULL,            -- 주소(동)
+    wishlist VARCHAR(100) NULL,                -- 관심
     mdate DATE DEFAULT (CURRENT_DATE),         -- 날짜(생성)
     mdateup DATE DEFAULT (CURRENT_DATE)        -- 날짜(수정)
 );
@@ -87,7 +87,7 @@ CREATE TABLE guest_user (
 	gaddress1 varchar(100),
 	gaddress2 varchar(100),
 	gaddress3 varchar(100),
-	wishlist varchar(50) null, -- 관심 내역
+	wishlist varchar(100) null, -- 관심 내역
 	createdDate DATETIME DEFAULT CURRENT_TIMESTAMP, -- 생성일
 	updatedDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 수정일
 	UNIQUE KEY uq_member (mno , wishlist)        -- 회원 중복 방지

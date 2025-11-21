@@ -2,29 +2,29 @@
 --  MEMBERS 초기 데이터
 -- ===============================
 INSERT INTO members
-(mid, mpwd, mname, mphone, memail, maddress1, maddress2, maddress3, mdate, mdateup)
+(mid, mpwd, mname, mphone, memail, maddress1, maddress2, maddress3, mdate, mdateup , wishlist)
 VALUES ('hong123', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '홍길동', '010-1234-0001',
-        'hong123@test.com', '인천광역시', '부평구', '십정동', '2025-10-13', '2025-10-14'),
+        'hong123@test.com', '인천광역시', '부평구', '십정동', '2025-10-13', '2025-10-14' , ''),
        ('kimsky', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '김하늘', '010-1234-0002',
-        'kimsky@test.com', '인천광역시', '계양구', '작전동', '2025-10-13', '2025-10-14'),
+        'kimsky@test.com', '인천광역시', '계양구', '작전동', '2025-10-13', '2025-10-14' , ''),
        ('parkyh', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '박영희', '010-1234-0003',
-        'parkyh@test.com', '인천광역시', '연수구', '송도동', '2025-10-13', '2025-10-14'),
+        'parkyh@test.com', '인천광역시', '연수구', '송도동', '2025-10-13', '2025-10-14' , ''),
        ('choijs', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '조지수', '010-1234-0004',
-        'choijs@test.com', '인천광역시', '부평구', '부개동', '2025-10-13', '2025-10-14'),
+        'choijs@test.com', '인천광역시', '부평구', '부개동', '2025-10-13', '2025-10-14' , ''),
        ('leesmile', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '이미소', '010-1234-0005',
-        'leesmile@test.com', '인천광역시', '남동구', '구월동', '2025-10-13', '2025-10-14'),
+        'leesmile@test.com', '인천광역시', '남동구', '구월동', '2025-10-13', '2025-10-14' , ''),
        ('janghm', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '장한민', '010-1234-0006',
-        'janghm@test.com', '인천광역시', '미추홀구', '주안동', '2025-10-13', '2025-10-14'),
+        'janghm@test.com', '인천광역시', '미추홀구', '주안동', '2025-10-13', '2025-10-14' , ''),
        ('jihoon', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '지훈찌', '010-8537-1882',
-        'thdwlgns1210@naver.com', '인천광역시', '부평구', '산곡동', '2025-10-13', '2025-10-14'),
+        'thdwlgns1210@naver.com', '인천광역시', '부평구', '산곡동', '2025-10-13', '2025-10-14' , ''),
        ('kangsh', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '강승현', '010-1234-0008',
-        'kangsh@test.com', '인천광역시', '연수구', '송도동', '2025-10-13', '2025-10-14'),
+        'kangsh@test.com', '인천광역시', '연수구', '송도동', '2025-10-13', '2025-10-14' , ''),
        ('songmj', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '송민정', '010-1234-0009',
-        'songmj@test.com', '인천광역시', '중구', '운서동', '2025-10-13', '2025-10-14'),
+        'songmj@test.com', '인천광역시', '중구', '운서동', '2025-10-13', '2025-10-14' , ''),
        ('1313', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '송민종', '010-1234-0010',
-        'songmj2@test.com', '인천광역시', '중구', '주안동', '2025-10-13', '2025-10-14'),
+        'songmj2@test.com', '인천광역시', '중구', '주안동', '2025-10-13', '2025-10-14' , ''),
        ('test', '$2a$10$69bMrChodVYxOcvM/cUo7evsho3hw6YBJT9yepHudwBlIvi7KlV0.', '테스트', '010-9874-6541', 'test@test.com',
-        '인천광역시', '남동구', '주안동', '2025-10-13', '2025-10-14');
+        '인천광역시', '남동구', '주안동', '2025-10-13', '2025-10-14' , '');
 
 -- ===============================
 --  BULKBUYGROUP 초기 데이터

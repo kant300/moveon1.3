@@ -31,4 +31,10 @@ public class GuestService {
     public GuestDto guestAddress(String guestKey){
         return guestMapper.guestAddress(guestKey);
     }
+
+
+    // 게스트 삭제
+    public void guestDelete(String  guestKey){
+        guestMapper.guestDelete(guestKey);
+    }
 }

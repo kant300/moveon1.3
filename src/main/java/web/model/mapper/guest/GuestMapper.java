@@ -1,9 +1,6 @@
 package web.model.mapper.guest;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 import web.model.dto.guest.GuestDto;
 
@@ -27,4 +24,7 @@ public interface GuestMapper {
     @Select("select * from guest_user where guestKey = #{guestKey} ")
     GuestDto guestAddress(String guestKey);
 
+    // 게스트 삭제
+    @Delete("delete from guest_user where guestKey = #{guestKey} ")
+    void guestDelete(String guestKey);
 }

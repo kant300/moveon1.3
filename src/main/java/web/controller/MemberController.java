@@ -27,8 +27,8 @@ public class MemberController {
 
     // 1. 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody MemberDto memberDto) {
-        boolean result = memberService.signup(memberDto);
+    public ResponseEntity<?> signup(@RequestHeader(value = "Guest-token" , required = false ) String guesttoken , @RequestBody MemberDto memberDto) {
+        boolean result = memberService.signup(memberDto , guesttoken);
         return ResponseEntity.ok(result);
     }
 

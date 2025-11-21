@@ -11,8 +11,8 @@ import static java.time.LocalTime.now;
 @Repository
 public interface MemberMapper {
     // 1. 회원가입
-    @Insert("insert into members( mid, mpwd, mname, mphone, memail, maddress1, maddress2, maddress3 , wishlist) " +
-            "values ( #{mid}, #{mpwd}, #{mname}, #{mphone}, #{memail}, #{maddress1}, #{maddress2}, #{maddress3} , #{wishlist} )")
+    @Insert("insert into members( mid, mpwd, mname, mphone, memail ) " +
+            "values ( #{mid}, #{mpwd}, #{mname}, #{mphone}, #{memail} )")
     @Options( useGeneratedKeys = true , keyProperty = "mno" )
     public int signup(MemberDto memberDto);
 
