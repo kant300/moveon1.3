@@ -14,7 +14,8 @@ public class WeatherController {
     private final WeatherService weatherService;
 
     @GetMapping("")
-    public String getData(@RequestParam int lat, @RequestParam int lon) {
+    // 위도와 경도는 소수점을 가질 수 있으므로 int 대신 double 타입을 사용
+    public String getData(@RequestParam double lat, @RequestParam double lon) {
         String result =  weatherService.getWeatherData(lat, lon);
         // System.out.println("result = " + result);
         return result;

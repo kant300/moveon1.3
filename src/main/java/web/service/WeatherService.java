@@ -1,3 +1,5 @@
+
+
 package web.service;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class WeatherService {
     // 기상청 API를 활용하여 데이터 가져오기
-    public String getWeatherData(int lat, int lon) {
+    public String getWeatherData(double lat, double lon) {
         try {
             // 현재 시간 구하기
             LocalDateTime now = LocalDateTime.now();
@@ -63,3 +65,4 @@ public class WeatherService {
         }
     }
 }
+
