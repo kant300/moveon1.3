@@ -20,3 +20,4 @@ public class MemberDto {
     private String newPwdConfirm;   // 새 비밀번호 확인
 
 }
+
