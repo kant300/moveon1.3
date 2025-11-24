@@ -83,6 +83,7 @@ public class MemberService {
         boolean result2 = bcrypt.matches(memberDto.getMpwd(), result.getMpwd());
         if (result2 == true) { // 비밀번호가 일치하면 로그인 성공
             result.setMpwd(null); // 비밀번호 성공시 반환되는 계정에는 비밀번호 제외
+            System.out.println("result2 = " + result2);
             return result;
         } else {
             return null;

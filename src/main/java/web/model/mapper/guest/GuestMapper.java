@@ -16,7 +16,7 @@ public interface GuestMapper {
     @Update("update guest_user set gaddress1 = #{gaddress1}, gaddress2 = #{gaddress2}, gaddress3 = #{gaddress3} where guestKey = #{guestKey} ")
     void guestsavedetail(String guestKey, String gaddress1, String gaddress2, String gaddress3);
 
-    // 게스트 주소
+    // 게스트 즐찾
     @Update("update guest_user set wishlist = #{wishlist} where guestKey = #{guestKey} ")
     void guestDwishlist(String guestKey , String wishlist);
 

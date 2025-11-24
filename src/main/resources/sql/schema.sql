@@ -15,9 +15,9 @@ CREATE TABLE members (
     mname VARCHAR(100) NOT NULL,               -- 닉네임
     mphone VARCHAR(20) NOT NULL UNIQUE,        -- 휴대번호
     memail VARCHAR(100) NOT NULL UNIQUE,       -- 이메일
-    maddress1 VARCHAR(50) NOT NULL,            -- 주소(시)
-    maddress2 VARCHAR(50) NOT NULL,            -- 주소(구)
-    maddress3 VARCHAR(50) NOT NULL,            -- 주소(동)
+    maddress1 VARCHAR(50) NOT NULL default "",            -- 주소(시)
+    maddress2 VARCHAR(50) NOT NULL default "",            -- 주소(구)
+    maddress3 VARCHAR(50) NOT NULL default "",            -- 주소(동)
     wishlist VARCHAR(100) NOT NULL default "",            -- 관심
     mdate DATE DEFAULT (CURRENT_DATE),         -- 날짜(생성)
     mdateup DATE DEFAULT (CURRENT_DATE)        -- 날짜(수정)
