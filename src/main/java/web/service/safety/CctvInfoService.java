@@ -1,9 +1,8 @@
-package web.service.CCTV;
+package web.service.safety;
 
 import jakarta.annotation.PostConstruct;
-import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;
-import web.model.dto.CCTV.CctvInfo;
+import web.model.dto.safety.CctvInfo;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

@@ -177,50 +177,53 @@ public class SexCrimeService {
      * @param dong 요청 읍면동명 (nullable)
      * @return 필터링된 SexCrimeDto 리스트
      */
-    public List<SexCrimeDto> filterByRegion(String sido, String sigungu, String dong) {
-        // 1. 입력 값 정규화
-        final String inputSido = normalizeRegionName(sido);
+
+    public Map<String, Integer> filterByRegion(String sido, String sigungu, String dong) {
+
+        // 1. 입력값 정규화
+        final String inputSido   = normalizeRegionName(sido);
         final String inputSigungu = (sigungu != null) ? sigungu.trim() : null;
-        // 읍면동 입력 값 정규화 (trim만 적용)
-        final String inputDong = (dong != null) ? dong.trim() : null;
+        final String inputDong    = (dong != null) ? dong.trim() : null;
 
-        // 2. 스트림을 사용하여 필터링
-        List<SexCrimeDto> filteredList = crimeList.stream()
-                .filter(c -> {
-                    // CSV 데이터의 시도 정규화
-                    String csvSido = normalizeRegionName(c.getChgBfrCtpvNm());
+        int sidoCount = 0;
+        int sigunguCount = 0;
+        int dongCount = 0;
 
-                    // (A) 시도 일치 확인
-                    if (!csvSido.equals(inputSido)) {
-                        return false;
+        for (SexCrimeDto c : crimeList) {
+
+            String csvSido   = normalizeRegionName(c.getChgBfrCtpvNm());
+            String csvSigungu = (c.getChgBfrSggNm() != null) ? c.getChgBfrSggNm().trim() : "";
+            String csvDong    = (c.getChgBfrUmdNm() != null) ? c.getChgBfrUmdNm().trim() : "";
+
+            // -----------------------
+            // 1) 시도 카운트
+            // -----------------------
+            if (csvSido.equals(inputSido)) {
+                sidoCount++;
+
+                // -----------------------
+                // 2) sigungu 입력되면 구군 카운트
+                // -----------------------
+                if (inputSigungu != null && inputSigungu.equals(csvSigungu)) {
+                    sigunguCount++;
+
+                    // -----------------------
+                    // 3) dong 입력되면 동 카운트 (startsWith)
+                    // -----------------------
+                    if (inputDong != null && csvDong.startsWith(inputDong)) {
+                        dongCount++;
                     }
+                }
+            }
+        }
 
-                    // (B) 시군구가 요청된 경우, 시군구 일치 확인
-                    if (inputSigungu != null && !inputSigungu.isEmpty()) {
-                        String csvSigungu = (c.getChgBfrSggNm() != null) ? c.getChgBfrSggNm().trim() : "";
-                        if (!csvSigungu.equals(inputSigungu)) {
-                            return false;
-                        }
-                    }
+        // 결과 리턴
+        Map<String, Integer> result = new HashMap<>();
+        result.put("sido", sidoCount);
+        result.put("sigungu", sigunguCount);
+        result.put("dong", dongCount);
 
-                    // (C) ⭐ 읍면동이 요청된 경우, 읍면동 일치 확인 (startsWith 사용)
-                    if (inputDong != null && !inputDong.isEmpty()) {
-                        String csvUmd = (c.getChgBfrUmdNm() != null) ? c.getChgBfrUmdNm().trim() : "";
-                        // 입력된 DONG 값으로 시작하는지 확인 ("부평동" 요청 시 "부평1동", "부평2동" 포함)
-                        if (!csvUmd.startsWith(inputDong)) {
-                            return false;
-                        }
-                    }
-
-                    // 모든 조건을 통과하면 포함
-                    return true;
-                })
-                .collect(Collectors.toList());
-
-        System.out.println("✅ 필터링 요청: SIDO=" + sido + (sigungu != null ? ", SIGUNGU=" + sigungu : "")
-                + (dong != null ? ", DONG=" + dong : "") + " -> 결과 " + filteredList.size() + "건");
-
-        return filteredList;
+        return result;
     }
 
 }

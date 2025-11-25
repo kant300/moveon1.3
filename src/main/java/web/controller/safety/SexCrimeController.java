@@ -46,13 +46,14 @@ public class SexCrimeController {
     // ⭐ [새로운 기능 추가: 지역 필터링]
     // 요청 예시: /api/sexcrime/filter?sido=인천광역시&sigungu=부평구&dong=부평동
     @GetMapping("/filter")
-    public ResponseEntity<List<SexCrimeDto>> getFilteredCrimes(
+    public ResponseEntity<?> getFilteredCrimes(
             @RequestParam(required = true) String sido,
             @RequestParam(required = false) String sigungu,
             @RequestParam(required = false) String dong
     ) {
+        System.out.println("sido = " + sido + ", sigungu = " + sigungu + ", dong = " + dong);
         // 1. 서비스에서 필터링된 데이터 목록을 가져옵니다.
-        List<SexCrimeDto> filteredList = sexCrimeService.filterByRegion(sido, sigungu, dong);
+        Map<String,Integer> filteredList = sexCrimeService.filterByRegion(sido, sigungu, dong);
 
         // 2. 결과를 반환합니다. 데이터가 없으면 204 No Content를 반환할 수도 있지만,
         // 여기서는 빈 리스트를 반환하고 200 OK를 유지합니다.
