@@ -17,6 +17,6 @@ public class CctvInfo {
     private String 보관일수;            // 예: 30일
     private String 설치연월;            // 설치된 연월 (YYYY-MM)
     private String 관리기관전화번호;      // 문의 전화
-    private String WGS84위도;           // 위도
-    private String WGS84경도;           // 경도
+    private String 위도;           // 위도
+    private String 경도;           // 경도
 }
