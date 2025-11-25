@@ -24,6 +24,7 @@ public interface GuestMapper {
     @Select("select * from guest_user where guestKey = #{guestKey} ")
     GuestDto guestAddress(String guestKey);
 
+
     // 게스트 삭제
     @Delete("delete from guest_user where guestKey = #{guestKey} ")
     void guestDelete(String guestKey);

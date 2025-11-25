@@ -40,7 +40,7 @@ public class GuestController {
     }
 
     // guest  / wishlist 저장
-    @PostMapping("/wishlist")
+    @PutMapping("/wishlist")
     public ResponseEntity< ? > guestDwishlist(@RequestHeader("Authorization") String tokens, @RequestBody GuestDto guestDto){
 
         String token = tokens.replace("Bearer ", "");
@@ -62,5 +62,7 @@ public class GuestController {
 
         return ResponseEntity.ok(dto);
     }
+
+
 
 }
