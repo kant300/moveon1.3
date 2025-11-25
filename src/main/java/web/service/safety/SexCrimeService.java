@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class SexCrimeService {
@@ -80,6 +81,7 @@ public class SexCrimeService {
             System.out.println("❌ SexCrime CSV 로드 중 오류!");
         }
     }
+
 
     /**
      * 시도 명칭을 표준화합니다 (예: "인천광역시" -> "인천").
@@ -164,6 +166,62 @@ public class SexCrimeService {
         result.put("sidoCount", sidoCount);
         result.put("sigunguCount", sigunguCount);
         result.put("dongCount", dongCount);
+
+        return result;
+    }
+    // ⭐ [수정된 기능: 지역별 필터링된 리스트 반환 - 읍면동 추가]
+    /**
+     * 시도, 시군구, 읍면동에 따라 성범죄자 데이터를 필터링하여 반환합니다.
+     * @param sido 요청 시도명
+     * @param sigungu 요청 시군구명 (nullable)
+     * @param dong 요청 읍면동명 (nullable)
+     * @return 필터링된 SexCrimeDto 리스트
+     */
+
+    public Map<String, Integer> filterByRegion(String sido, String sigungu, String dong) {
+
+        // 1. 입력값 정규화
+        final String inputSido   = normalizeRegionName(sido);
+        final String inputSigungu = (sigungu != null) ? sigungu.trim() : null;
+        final String inputDong    = (dong != null) ? dong.trim() : null;
+
+        int sidoCount = 0;
+        int sigunguCount = 0;
+        int dongCount = 0;
+
+        for (SexCrimeDto c : crimeList) {
+
+            String csvSido   = normalizeRegionName(c.getChgBfrCtpvNm());
+            String csvSigungu = (c.getChgBfrSggNm() != null) ? c.getChgBfrSggNm().trim() : "";
+            String csvDong    = (c.getChgBfrUmdNm() != null) ? c.getChgBfrUmdNm().trim() : "";
+
+            // -----------------------
+            // 1) 시도 카운트
+            // -----------------------
+            if (csvSido.equals(inputSido)) {
+                sidoCount++;
+
+                // -----------------------
+                // 2) sigungu 입력되면 구군 카운트
+                // -----------------------
+                if (inputSigungu != null && inputSigungu.equals(csvSigungu)) {
+                    sigunguCount++;
+
+                    // -----------------------
+                    // 3) dong 입력되면 동 카운트 (startsWith)
+                    // -----------------------
+                    if (inputDong != null && csvDong.startsWith(inputDong)) {
+                        dongCount++;
+                    }
+                }
+            }
+        }
+
+        // 결과 리턴
+        Map<String, Integer> result = new HashMap<>();
+        result.put("sido", sidoCount);
+        result.put("sigungu", sigunguCount);
+        result.put("dong", dongCount);
 
         return result;
     }
