@@ -187,6 +187,10 @@ public class MemberService {
     public boolean updateWishlist(String mid, String wishlist) {
         return memberMapper.updateWishlist(mid, wishlist) > 0;
     }
+    // 즐겨찾기 출력
+    public String wishprint(String mid){
+        return memberMapper.wishprint(mid);
+    }
 
 
     // 7-1. 비밀번호 변경

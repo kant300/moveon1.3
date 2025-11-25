@@ -82,6 +82,19 @@ public class MemberController {
         return ResponseEntity.ok(Map.of("success", result));
     }
 
+    // 즐겨찾기 출력
+    @GetMapping("wishprint")
+    public ResponseEntity<?> wishprint(@RequestHeader("Authorization") String tokens ) {
+        if (tokens == null || !tokens.startsWith("Bearer ")) {
+            return ResponseEntity.status(401).body("오류");
+        }
+        String token = tokens.substring("Bearer ".length());
+        String member = jwtService.getMid(token);
+
+        String result = memberService.wishprint(member);
+        return ResponseEntity.ok(Map.of("success", result));
+    }
+
 
     // 4. 로그아웃
     @GetMapping("/logout")

@@ -40,6 +40,9 @@ public interface MemberMapper {
     @Update("UPDATE members SET wishlist = #{wishlist} WHERE mid = #{mid}")
     int updateWishlist(@Param("mid") String mid, @Param("wishlist") String wishlist);
 
+    // 즐겨찾기 ㅅ출력
+    @Select("SELECT wishlist from members WHERE mid = #{mid} ")
+    String wishprint(String mid);
 
     // 6. 회원정보 수정
     @Update("update members set mname = #{mname}, memail = #{memail}, mphone=#{mphone}, " +
