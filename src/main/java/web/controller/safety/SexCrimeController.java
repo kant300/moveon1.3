@@ -39,7 +39,7 @@ public class SexCrimeController {
         Map<String, Object> result = new HashMap<>();
         result.put("region", region);
         result.put("counts", counts);
-        result.put("source", "여성가족부 성범죄자 알림e 공개자료");
+        result.put("source", "여성가족부 성범죄자 공개 데이터");
 
         return result;
     }
