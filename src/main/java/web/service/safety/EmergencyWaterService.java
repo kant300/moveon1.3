@@ -1,8 +1,8 @@
 package web.service.safety;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.locationtech.proj4j.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import web.model.dto.safety.EmergencyWaterDto;
@@ -10,9 +10,7 @@ import web.model.dto.safety.EmergencyWaterResponse;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +39,7 @@ public class EmergencyWaterService {
             List<EmergencyWaterDto> list = new ArrayList<>();
 
             for( Map<String, Object> item : response.getBody() ){
+
                 EmergencyWaterDto dto = new EmergencyWaterDto();
 
                 dto.setId((String) item.get("FCLT_MNG_NO"));
@@ -48,13 +47,18 @@ public class EmergencyWaterService {
                 dto.setDistrict((String) item.get("SGG_NM"));
                 dto.setRoadName((String) item.get("ROAD_NM"));
                 dto.setEmd((String) item.get("EMD_NM"));
-                dto.setX(Double.parseDouble(item.get("XMAP_CRTS").toString()));
-                dto.setY(Double.parseDouble(item.get("YMAP_CRTS").toString()));
 
-                // 좌표 변환: EPSG:5179 → WGS84
-                double[] latLng = convert5179ToWgs84(dto.getX(), dto.getY());
-                dto.setLat(latLng[0]);
-                dto.setLon(latLng[1]);
+
+                double x = Double.parseDouble(item.get("XMAP_CRTS").toString());
+                double y = Double.parseDouble(item.get("YMAP_CRTS").toString());
+
+                dto.setX(x);
+                dto.setY(y);
+
+                // ✅ 정확한 좌표 변환: EPSG:5179 → WGS84
+                double[] latLng = convert5179ToWgs84(x, y);
+                dto.set위도(latLng[0]);   // 위도
+                dto.set경도(latLng[1]);   // 경도
 
                 list.add(dto);
             }
@@ -62,13 +66,29 @@ public class EmergencyWaterService {
             return list;
 
         } catch (Exception e) {
-            throw new RuntimeException("비상급수시설 API 호출 실패: " + e.getMessage(), e);
+            throw new RuntimeException("비상급수시설 API 호출 실패: ", e);
         }
     }
-    // 좌표 변환 함수
+
+    // ✅ EPSG:5179 → WGS84 정확 변환
     public static double[] convert5179ToWgs84(double x, double y) {
-        // 실제 EPSG:5179 → WGS84 변환 로직 넣기
-        // 테스트용은 그대로 반환
-        return new double[]{y / 100000.0, x / 100000.0}; // 예시
+
+        CRSFactory crsFactory = new CRSFactory();
+
+        CoordinateReferenceSystem srcCrs = crsFactory.createFromName("EPSG:5179");
+        CoordinateReferenceSystem dstCrs = crsFactory.createFromName("EPSG:4326");
+
+        CoordinateTransformFactory ctFactory = new CoordinateTransformFactory();
+        CoordinateTransform transform = ctFactory.createTransform(srcCrs, dstCrs);
+
+        ProjCoordinate srcCoord = new ProjCoordinate(x, y);
+        ProjCoordinate dstCoord = new ProjCoordinate();
+
+        transform.transform(srcCoord, dstCoord);
+
+        double lat = dstCoord.y;
+        double lon = dstCoord.x;
+
+        return new double[]{lat, lon};
     }
 }

@@ -14,7 +14,7 @@ public class EmergencyWaterDto {
     private double x; // XMAP_CRTS
     private double y; // YMAP_CRTS
 
-    private double lat;       // WGS84 위도
-    private double lon;       // WGS84 경도
+    private double 위도;       // WGS84 위도
+    private double 경도;       // WGS84 경도
 
 }
