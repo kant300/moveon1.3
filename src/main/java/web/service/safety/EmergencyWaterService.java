@@ -38,7 +38,12 @@ public class EmergencyWaterService {
 
             List<EmergencyWaterDto> list = new ArrayList<>();
 
-            for( Map<String, Object> item : response.getBody() ){
+            List<Map<String, Object>> items = response.getBody();
+            if(items == null ){
+                throw new RuntimeException("API body가 null 입니다!");
+            }
+
+            for( Map<String, Object> item : items ){
 
                 EmergencyWaterDto dto = new EmergencyWaterDto();
 
@@ -56,7 +61,7 @@ public class EmergencyWaterService {
                 dto.setY(y);
 
                 // ✅ 정확한 좌표 변환: EPSG:5179 → WGS84
-                double[] latLng = convert5179ToWgs84(x, y);
+                double[] latLng = convert3857ToWgs84(x, y);
                 dto.set위도(latLng[0]);   // 위도
                 dto.set경도(latLng[1]);   // 경도
 
@@ -71,23 +76,13 @@ public class EmergencyWaterService {
     }
 
     // ✅ EPSG:5179 → WGS84 정확 변환
-    public static double[] convert5179ToWgs84(double x, double y) {
+    public static double[] convert3857ToWgs84(double x, double y) {
 
-        CRSFactory crsFactory = new CRSFactory();
+        // WGS84 WebMercator → WGS84 변환 공식
+        double lon = (x / 20037508.34) * 180;
+        double lat = (y / 20037508.34) * 180;
 
-        CoordinateReferenceSystem srcCrs = crsFactory.createFromName("EPSG:5179");
-        CoordinateReferenceSystem dstCrs = crsFactory.createFromName("EPSG:4326");
-
-        CoordinateTransformFactory ctFactory = new CoordinateTransformFactory();
-        CoordinateTransform transform = ctFactory.createTransform(srcCrs, dstCrs);
-
-        ProjCoordinate srcCoord = new ProjCoordinate(x, y);
-        ProjCoordinate dstCoord = new ProjCoordinate();
-
-        transform.transform(srcCoord, dstCoord);
-
-        double lat = dstCoord.y;
-        double lon = dstCoord.x;
+        lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180)) - Math.PI / 2);
 
         return new double[]{lat, lon};
     }
