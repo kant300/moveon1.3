@@ -1,4 +1,4 @@
-package web.model.dto.WheelchairCharger;
+package web.model.dto.transport;
 import lombok.*;
 
 @Getter @Setter @ToString

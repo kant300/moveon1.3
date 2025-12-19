@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS group_member;
 DROP TABLE IF EXISTS chatting;
 DROP TABLE IF EXISTS bulkbuygroup;
 DROP TABLE IF EXISTS members;
+DROP TABLE IF EXISTS guest_user;
 
 CREATE TABLE members (
     mno INT AUTO_INCREMENT PRIMARY KEY,        -- 회원번호
@@ -14,9 +15,10 @@ CREATE TABLE members (
     mname VARCHAR(100) NOT NULL,               -- 닉네임
     mphone VARCHAR(20) NOT NULL UNIQUE,        -- 휴대번호
     memail VARCHAR(100) NOT NULL UNIQUE,       -- 이메일
-    maddress1 VARCHAR(50) NOT NULL,            -- 주소(시)
-    maddress2 VARCHAR(50) NOT NULL,            -- 주소(구)
-    maddress3 VARCHAR(50) NOT NULL,            -- 주소(동)
+    maddress1 VARCHAR(50) NOT NULL default "",            -- 주소(시)
+    maddress2 VARCHAR(50) NOT NULL default "",            -- 주소(구)
+    maddress3 VARCHAR(50) NOT NULL default "",            -- 주소(동)
+    wishlist VARCHAR(250) NOT NULL default "",            -- 관심
     mdate DATE DEFAULT (CURRENT_DATE),         -- 날짜(생성)
     mdateup DATE DEFAULT (CURRENT_DATE)        -- 날짜(수정)
 );
@@ -76,4 +78,17 @@ CREATE TABLE group_member (
     CONSTRAINT fk_groupmember_group FOREIGN KEY (bno)
         REFERENCES bulkbuygroup(bno)
         ON DELETE CASCADE
+);
+
+CREATE TABLE guest_user (
+	fno INT AUTO_INCREMENT PRIMARY KEY,  -- 고유 번호
+	mno int null , -- 회원
+	guestKey varchar(100) not null UNIQUE,
+	gaddress1 varchar(100),
+	gaddress2 varchar(100),
+	gaddress3 varchar(100),
+	wishlist varchar(250) null, -- 관심 내역
+	createdDate DATETIME DEFAULT CURRENT_TIMESTAMP, -- 생성일
+	updatedDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 수정일
+	UNIQUE KEY uq_member (mno , wishlist)        -- 회원 중복 방지
 );

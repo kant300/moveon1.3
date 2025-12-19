@@ -1,14 +1,13 @@
-package web.service.WheelchairCharger;
+package web.service.transport;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
-import web.model.dto.WheelchairCharger.WheelchairChargerDto;
+import web.model.dto.transport.WheelchairChargerDto;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 

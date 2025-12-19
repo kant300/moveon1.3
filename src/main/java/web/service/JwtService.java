@@ -33,6 +33,20 @@ public class JwtService {
         System.out.println("token = " + token); // 확인
         return token;
     }
+
+    // guest token
+    public String createguestToken(String guestKey){
+        String token = Jwts.builder()
+                .claim("guestKey" , guestKey) // guestKJey controller
+                .claim("mrole" , "guest") // 권한 게스트
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 토큰 발급 시간
+                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .compact(); // 객체 빌더 함수 종료
+        System.out.println("token = " + token);
+        return token;
+    }
+
     // [3-2] 토큰 검증
     public boolean checkToken( String token ){
         try {  Jwts.parser()
@@ -59,6 +73,10 @@ public class JwtService {
 
     public String getMrole(String token) {
         return getClaims(token).get("mrole", String.class);
+    }
+
+    public String getGuestKey(String token) {
+        return getClaims(token).get("guestKey", String.class);
     }
 
 
